@@ -1,9 +1,11 @@
 import request from 'superagent'
 
-const serverURL = 'http://localhost:3000/api/v1'
-
-// *** EXAMPLE ***
-export function getWelcome() {
-  return request.get(`${serverURL}/welcome`).then((response) => response.body)
+export async function getPalettes() {
+  const resp = await request.get('/')
+  return resp.body
 }
-// ***   ***   ***
+
+export async function getAPalette(id) {
+  const resp = await request.get('/palettes/' + id)
+  return resp.body
+}
