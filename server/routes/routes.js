@@ -28,14 +28,16 @@ router.get('/generate', async (req, res) => {
 
 router.post('/generatetarget', async (req, res) => {
   const { colorOne, colorTwo } = req.body
-  console.log(colorOne)
+
   const palette = await request
     .post('http://colormind.io/api/')
     .set('Content-Type', 'application/json')
-    .send({
-      model: 'ui',
-      input: [colorOne, 'N', 'N', 'N', colorTwo],
-    })
+    .send(
+      JSON.stringify({
+        model: 'ui',
+        input: [colorOne, 'N', 'N', 'N', colorTwo],
+      })
+    )
   return res.json(palette.text)
 })
 

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { generatePalette, generateTargetedPalette } from '../apiClient'
 import { randomNum, rgbArraytoHexArray, hexToRgb } from '../../server/utils'
+import { HexColorPicker } from 'react-colorful'
 
 export default function Generate({ palettes }) {
   const [generatedPalette, setGeneratedPalette] = useState(null)
+  const [color, setColor] = useState('#aabbcc')
 
   const handleGenerate = async () => {
     const generate = await generatePalette()
@@ -11,19 +13,21 @@ export default function Generate({ palettes }) {
     setGeneratedPalette(hex)
   }
 
+  const handleColorInput = (e) => {
+    let newColorIndex = e.target.dataset.index
+    let newPalette = [...generatedPalette]
+    newPalette.splice(newColorIndex, 1, e.target.value)
+    setGeneratedPalette(newPalette)
+  }
+
   const handleTargetGenerate = async (e) => {
     e.preventDefault()
-    console.log(generatedPalette[0])
-    console.log(generatedPalette[4])
-    // getting slight variations in conversions
+
     let colorOne = hexToRgb(generatedPalette[0])
     let colorTwo = hexToRgb(generatedPalette[4])
-    console.log(colorOne)
-    console.log(colorTwo)
 
     const targetedPalette = await generateTargetedPalette(colorOne, colorTwo)
     let targetedHex = rgbArraytoHexArray(targetedPalette.result)
-    console.log(targetedHex)
     setGeneratedPalette(targetedHex)
   }
 
@@ -68,24 +72,30 @@ export default function Generate({ palettes }) {
               </p>
               <form>
                 <label htmlFor="colorOne">First Color:</label>
-                <input
+                <HexColorPicker color={color} onChange={setColor} />
+                {/* <input
                   type="color"
                   name="colorOne"
                   id="colorOne"
                   className="color-picker"
-                  key={generatedPalette[0]}
+                  data-index="0"
+                  onChange={handleColorInput}
+                  //Key value ensures defaultValue updates after generation, but
+                  //   key={generatedPalette[0]}
                   defaultValue={generatedPalette[0]}
-                />
+                /> */}
 
                 <label htmlFor="colorOne">Last Color:</label>
-                <input
+                {/* <input
                   type="color"
                   name="colorTwo"
                   id="colorTwo"
                   className="color-picker"
-                  key={generatedPalette[4]}
+                  data-index="4"
+                  onChange={handleColorInput}
+                  //   key={generatedPalette[4]}
                   defaultValue={generatedPalette[4]}
-                />
+                /> */}
                 <button onClick={handleTargetGenerate} className="btn-small">
                   Generate
                 </button>
