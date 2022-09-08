@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { generatePalette, generateTargetedPalette } from '../apiClient'
 import { randomNum, rgbArraytoHexArray, hexToRgb } from '../../server/utils'
-import { HexColorPicker } from 'react-colorful'
+
+import GeneratedColor from './GeneratedColor'
 
 export default function Generate({ palettes }) {
   const [generatedPalette, setGeneratedPalette] = useState(null)
-  const [color, setColor] = useState('#aabbcc')
 
   const handleGenerate = async () => {
     const generate = await generatePalette()
@@ -41,13 +41,7 @@ export default function Generate({ palettes }) {
         <div className="generate-container">
           <div className="generate-background">
             {generatedPalette.map((color, i) => (
-              <div
-                key={i}
-                className="generate-color"
-                style={{ backgroundColor: `${color}` }}
-              >
-                {color}
-              </div>
+              <GeneratedColor currentColor={color} key={color} />
             ))}
           </div>
 
@@ -71,8 +65,8 @@ export default function Generate({ palettes }) {
                 Select a start and end color and let the generator fill the gaps
               </p>
               <form>
-                <label htmlFor="colorOne">First Color:</label>
-                <HexColorPicker color={color} onChange={setColor} />
+                <label htmlFor="colorOne">First olor:</label>
+
                 {/* <input
                   type="color"
                   name="colorOne"

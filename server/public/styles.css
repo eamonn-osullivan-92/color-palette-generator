@@ -149,17 +149,58 @@ a {
 }
 
 .generate-background {
-    height: 65%;
+    height: 50%;
     width: 100%;
-    position: relative;
     display: flex;
 }
 
-.generate-color {
+.generated-color-container {
+    height: 100%;
+    width: 20%;
+    position: relative;
+}
+
+.generated-color {
+    height: 100%;
+    width: 100%;
+
+}
+
+.color-tools-container {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+   
+    background-color: white;
+}
+
+.selector-button-container {
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20%;
+    gap: 1em;
+}
+
+.selector-button-container button {
+    background: none;
+    outline: none;
+    border: none;
+}
+
+.color-picker-selector {
+    position: absolute;
+    bottom: -200px;
+}
+
+/* OLD UI - TO BE CHANGED */
+/* 
+.button-container {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px
 }
 
 .ui-panel {
@@ -211,4 +252,4 @@ a {
 
 .target-generate-container input {
     margin-right: 1em;
-}
+} */
