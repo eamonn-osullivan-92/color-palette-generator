@@ -16,26 +16,25 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/generate', async (req, res) => {
-  const palette = await request
-    .post('http://colormind.io/api/')
-    .set('Content-Type', 'application/json')
-    .send({
-      model: 'ui',
-    })
-  return res.json(palette.text)
-})
+// router.get('/generate', async (req, res) => {
+//   const palette = await request
+//     .post('http://colormind.io/api/')
+//     .set('Content-Type', 'application/json')
+//     .send({
+//       model: 'ui',
+//     })
+//   return res.json(palette.text)
+// })
 
 router.post('/generatetarget', async (req, res) => {
-  const { colorOne, colorTwo } = req.body
-
+  const newPalette = req.body
   const palette = await request
     .post('http://colormind.io/api/')
     .set('Content-Type', 'application/json')
     .send(
       JSON.stringify({
-        model: 'ui',
-        input: [colorOne, 'N', 'N', 'N', colorTwo],
+        model: 'default',
+        input: newPalette,
       })
     )
   return res.json(palette.text)

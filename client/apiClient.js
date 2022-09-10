@@ -16,10 +16,10 @@ export async function generatePalette() {
   return parsed
 }
 
-export async function generateTargetedPalette(colorOne, colorTwo) {
+export async function generateTargetedPalette(newPalette) {
   const palette = await request
     .post('/api/v1/palettes/generatetarget')
-    .send({ colorOne, colorTwo })
+    .send(newPalette)
   const parsed = JSON.parse(palette.body)
   return parsed
 }

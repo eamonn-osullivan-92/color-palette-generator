@@ -191,7 +191,13 @@ a {
 
 .color-picker-selector {
     position: absolute;
-    bottom: -200px;
+    bottom: -210px;
+    left: 10%;
+}
+
+.locked-icon {
+    border-radius: 50%;
+    color: red;
 }
 
 /* OLD UI - TO BE CHANGED */
