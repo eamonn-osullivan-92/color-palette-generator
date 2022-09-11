@@ -11,11 +11,15 @@ export default function GeneratedColor({
   const [isSelector, setIsSelector] = useState(false)
   const [isLocked, setIsLocked] = useState(false)
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(color)
+  }
+
   const handleLock = () => {
     // set lock to true/false
     // if true, set locked color, else set to N\
     // Below code is working, but reads backwards
-    // changing color before locking will cause lock to reset but query will stay locked.
+    // changing color before locking will cause lock to reset but query will stay locked.w
 
     isLocked
       ? handleLockedPalettes(index, 'N')
@@ -27,11 +31,17 @@ export default function GeneratedColor({
     <div className="generated-color-container">
       <div
         className="generated-color"
-        style={{ backgroundColor: `${color}` }}
+        style={{
+          backgroundColor: `${color}`,
+        }}
       ></div>
       <div className="color-tools-container">
         <div className="selector-button-container">
           <div className="current-color">{color.toUpperCase()}</div>
+          <button className="copy-btn" onClick={handleCopy}>
+            <span className="copy-tooltip">Copy Hex</span>
+            <span className="material-icons">content_copy</span>
+          </button>
           <button
             onClick={() => setIsSelector(!isSelector)}
             className="change-color"
