@@ -6,10 +6,13 @@ function getPalettes(db = conn) {
   return db('palettes').select()
 }
 
-function addPalette(array, db = conn) {
+function addPalette(id, name, palette, db = conn) {
   return db('palettes').insert({
-    colors: JSON.stringify(array),
+    name: name,
+    colors: JSON.stringify(palette),
+    added_by_user: id,
   })
+  // .insert('palettes', JSON.stringify(palette))
 }
 
 function userExists(username, db = conn) {

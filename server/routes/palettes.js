@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../db/db')
 const utils = require('../utils')
+const checkJwt = require('../auth0')
 
 router.get('/', (req, res) => {
   db.getPalettes()
@@ -31,12 +32,17 @@ router.post('/generatetarget', async (req, res) => {
 })
 
 // add color to palettes
-router.post('/generate/save', (req, res) => {
-  let colors = req.body
-  let array = colors.colors.split(',')
-  db.addPalette(array)
+router.post('/generate/save', checkJwt, (req, res) => {
+  let id = req.user?.sub
+  let { name, palette } = req.body
+
+  console.log(id)
+  console.log(palette)
+  console.log(name)
+
+  db.addPalette(id, name, palette)
     .then(() => {
-      res.redirect('/generate')
+      console.log('saved')
     })
     .catch((err) => {
       console.log(err)

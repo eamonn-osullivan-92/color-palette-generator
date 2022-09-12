@@ -46,7 +46,7 @@ export default function GeneratedColor({
             onClick={() => setIsSelector(!isSelector)}
             className="change-color"
           >
-            <span className="material-icons">edit</span>
+            <span className="material-symbols-outlined">edit</span>
           </button>
           <button className="lock-color" onClick={handleLock}>
             {isLocked ? (

@@ -6,7 +6,6 @@ const router = express.Router()
 
 // GET /api/v1/users
 router.get('/', checkJwt, (req, res) => {
-  // this is returning undefined.
   const auth0_id = req.user?.sub
 
   if (!auth0_id) {
@@ -22,6 +21,7 @@ router.get('/', checkJwt, (req, res) => {
 
 // POST /api/v1/users
 router.post('/', checkJwt, (req, res) => {
+  // const auth0_id = req.user?.sub <-- bring this back in now that we have checkJwt
   const auth0_id = req.body.auth0Id
   console.log('route call: ' + auth0_id)
   const { username } = req.body

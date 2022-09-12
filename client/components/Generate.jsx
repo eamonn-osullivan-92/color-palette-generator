@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { generateTargetedPalette } from '../apiClient'
 import { rgbArraytoHexArray } from '../../server/utils'
 import GeneratedColor from './GeneratedColor'
+import Tooltip from './Tooltip'
+import SaveForm from './SaveForm'
 
 export default function Generate() {
   const [generatedPalette, setGeneratedPalette] = useState([
@@ -12,6 +14,7 @@ export default function Generate() {
     '#1a1a1a',
   ])
   const [queryPalette, setQueryPalette] = useState(['N', 'N', 'N', 'N', 'N'])
+  const [isSave, setIsSave] = useState(false)
 
   const handleLockedPalettes = (index, color = 'N') => {
     queryPalette[index] = color
@@ -34,6 +37,10 @@ export default function Generate() {
 
     let targetedHex = rgbArraytoHexArray(newPalette.result)
     setGeneratedPalette(targetedHex)
+  }
+
+  const handleIsSave = () => {
+    setIsSave((prevState) => !prevState)
   }
 
   useEffect(async () => {
@@ -60,31 +67,16 @@ export default function Generate() {
             <button className="fetch-generate-btn btn" onClick={handleGenerate}>
               Generate
             </button>
-            <button className="save-palette-btn btn">Save</button>
+            <button className="save-palette-btn btn" onClick={handleIsSave}>
+              Save
+            </button>
           </div>
+          {isSave && (
+            <SaveForm palette={generatedPalette} setIsSave={setIsSave} />
+          )}
         </div>
       )}
-      <div className="tooltip-container">
-        <h3 className="toottip-heading">How to use:</h3>
-        <p>Click generate to create a random palette.</p>
-        <p>
-          If you have a specific color scheme in mind, you can select your
-          desired colors and lock it. The position of locked colors does
-          influence the generated palette so experiment with different
-          positions.
-        </p>
-
-        <p>
-          If you have two complimentary colors, try placing them at each end.
-          Contrasting colors placed closer together will generate a more triadic
-          color scheme.
-        </p>
-
-        <p>
-          The generator utilises the Colormind API. For more info visit
-          <a href="http://colormind.io/"> Colormind.io.</a>
-        </p>
-      </div>
+      <Tooltip />
     </>
   )
 }

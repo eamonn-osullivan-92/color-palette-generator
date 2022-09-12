@@ -31,11 +31,27 @@ export async function generatePalette() {
 }
 
 export async function generateTargetedPalette(newPalette) {
-  const palette = await request
-    .post(`${rootUrl}/palettes/generatetarget`)
-    .send(newPalette)
-  const parsed = JSON.parse(palette.body)
-  return parsed
+  try {
+    const palette = await request
+      .post(`${rootUrl}/palettes/generatetarget`)
+      .send(newPalette)
+    const parsed = JSON.parse(palette.body)
+    return parsed
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
+export async function savePalette(name, palette, token) {
+  try {
+    const res = await request
+      .post(`${rootUrl}/palettes/generate/save`)
+      .send({ name, palette })
+      .set('Authorization', `Bearer ${token}`)
+    return res.body
+  } catch (err) {
+    console.log(err.message)
+  }
 }
 
 // USERS //

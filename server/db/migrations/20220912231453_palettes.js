@@ -4,8 +4,9 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable('palettes', (table) => {
-    table.increments('id')
+    table.string('name')
     table.string('colors')
+    table.string('added_by_user')
   })
 }
 
