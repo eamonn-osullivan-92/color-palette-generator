@@ -29,6 +29,7 @@ function Register() {
       auth0Id: user.auth0Id,
       ...form,
     }
+    console.log(userInfo, user.token)
     addUser(userInfo, user.token)
       .then(() => dispatch(updateLoggedInUser(userInfo)))
       .catch((err) => console.log(err.message))
