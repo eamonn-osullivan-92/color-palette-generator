@@ -4,12 +4,12 @@
  */
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
-  await knex('table_name').del()
-  await knex('table_name').insert([
+  await knex('users').del()
+  await knex('users').insert([
     {
       auth0_id: 'auth0|123',
       username: 'banana_llama',
-      colors: JSON.stringify([
+      palettes: JSON.stringify([
         '#F9DC5C',
         '#FAE588',
         '#FBEA9E',
@@ -20,7 +20,7 @@ exports.seed = async function (knex) {
     {
       auth0_id: 'auth0|456',
       username: 'grape_gatsby',
-      colors: JSON.stringify([
+      palettes: JSON.stringify([
         '#F9DC5C',
         '#FAE588',
         '#FBEA9E',
