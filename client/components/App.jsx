@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
 import Home from './Home'
 import Header from './Header'
 import Palettes from './Palettes'
-import { getPalettes } from '../apiClient'
 import Generate from './Generate'
 
+import { getPalettes } from '../apiClient'
+
 function App() {
+  useCacheUser()
   const [palettes, setPalettes] = useState(null)
+  const navigate = useNavigate()
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0()
 
   useEffect(async () => {
     const palettesArr = await getPalettes()
     setPalettes(palettesArr)
   }, [])
+
   return (
     // elements not rendering
     <div className="main-container">

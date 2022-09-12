@@ -245,7 +245,7 @@ span {
     display: inline-block;
 }
 
-/* .copy-tooltip {
+.copy-tooltip {
     visibility: hidden;
     width: 140px;
     background-color: #555;
@@ -263,7 +263,7 @@ span {
 }
 
 .copy-tooltip::after {
-    content: "";
+    content: "Copy Hex";
     position: absolute;
     top: 100%;
     left: 50%;
@@ -276,7 +276,7 @@ span {
 .copy-tooltip:hover {
     visibility: visible;
     opacity: 1;
-} */
+}
 
 
 
