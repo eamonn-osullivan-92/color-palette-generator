@@ -1,12 +1,11 @@
 import React from 'react'
 import { randomNum } from '../../server/utils'
 
-export default function Home({ palettes }) {
-  const heroPalette = palettes[randomNum(palettes)]
+export default function Home({ palette }) {
   return (
     <div className="hero-container">
       <div className="hero-background">
-        {heroPalette.colors.map((color, i) => (
+        {palette.map((color, i) => (
           <div
             className="hero-color"
             key={i}

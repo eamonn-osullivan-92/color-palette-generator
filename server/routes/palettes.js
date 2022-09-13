@@ -5,8 +5,9 @@ const db = require('../db/db')
 const utils = require('../utils')
 const checkJwt = require('../auth0')
 
-router.get('/', (req, res) => {
-  db.getPalettes()
+router.get('/', checkJwt, (req, res) => {
+  let id = req.user?.sub
+  db.getPalettes(id)
     .then((palettes) => {
       let parsedColors = utils.parseColors(palettes)
       res.json(parsedColors)
@@ -35,10 +36,6 @@ router.post('/generatetarget', async (req, res) => {
 router.post('/generate/save', checkJwt, (req, res) => {
   let id = req.user?.sub
   let { name, palette } = req.body
-
-  console.log(id)
-  console.log(palette)
-  console.log(name)
 
   db.addPalette(id, name, palette)
     .then(() => {

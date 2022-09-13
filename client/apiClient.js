@@ -2,9 +2,12 @@ import request from 'superagent'
 
 const rootUrl = '/api/v1'
 
-export async function getPalettes() {
+export async function getPalettes(token) {
   try {
-    const resp = await request.get(`${rootUrl}/palettes`)
+    console.log(token)
+    const resp = await request
+      .get(`${rootUrl}/palettes`)
+      .set('Authorization', `Bearer ${token}`)
     return resp.body
   } catch (err) {
     console.log(err.message)

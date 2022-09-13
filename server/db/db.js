@@ -2,8 +2,8 @@ const environment = process.env.NODE_ENV || 'development'
 const config = require('./knexfile')[environment]
 const conn = require('knex')(config)
 
-function getPalettes(db = conn) {
-  return db('palettes').select()
+function getPalettes(id, db = conn) {
+  return db('palettes').select().where('added_by_user', id)
 }
 
 function addPalette(id, name, palette, db = conn) {
