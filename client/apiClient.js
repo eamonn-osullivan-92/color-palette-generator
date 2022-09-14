@@ -4,19 +4,9 @@ const rootUrl = '/api/v1'
 
 export async function getPalettes(token) {
   try {
-    console.log(token)
     const resp = await request
       .get(`${rootUrl}/palettes`)
       .set('Authorization', `Bearer ${token}`)
-    return resp.body
-  } catch (err) {
-    console.log(err.message)
-  }
-}
-
-export async function getAPalette(id) {
-  try {
-    const resp = await request.get(`${rootUrl}/palettes/${id}`)
     return resp.body
   } catch (err) {
     console.log(err.message)

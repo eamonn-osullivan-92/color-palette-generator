@@ -126,7 +126,7 @@ a {
 
 .palette {
     display: flex;
-    height: 200px;
+    height: 240px;
     width: 90%;
 }
 
@@ -135,6 +135,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .color:first-child {
@@ -143,6 +144,26 @@ a {
 
 .color:last-child {
     border-radius: 0 5px 5px 0;
+}
+
+.palette-tools-container {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+    background-color: white;
+    opacity: 0.9;
+    height: 40px;
+    gap: 1em;
+}
+
+.palette-tools-container button {
+    background: none;
+    border: none;
+    outline: none;
 }
 
 /* generate */
@@ -179,6 +200,7 @@ a {
    align-items: center;
    justify-content: center;
     background-color: white;
+    opacity: 0.9;
 }
 
 .current-color {

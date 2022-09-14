@@ -1,5 +1,4 @@
 import React from 'react'
-import { randomNum } from '../../server/utils'
 
 export default function Home({ palette }) {
   return (

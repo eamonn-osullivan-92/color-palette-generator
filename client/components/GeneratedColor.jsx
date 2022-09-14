@@ -19,7 +19,7 @@ export default function GeneratedColor({
     // set lock to true/false
     // if true, set locked color, else set to N\
     // Below code is working, but reads backwards
-    // changing color before locking will cause lock to reset but query will stay locked.w
+    // changing color before locking will cause lock to reset but query will stay locked.
 
     isLocked
       ? handleLockedPalettes(index, 'N')

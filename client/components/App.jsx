@@ -10,7 +10,7 @@ import Generate from './Generate'
 import Register from './Register'
 //
 import { useCacheUser } from '../auth0-utils'
-import { getUser, getPalettes } from '../apiClient'
+import { getUser } from '../apiClient'
 import { clearLoggedInUser, updateLoggedInUser } from '../actions/loggedInUser'
 import defaultPalettes from '../defaultPalettes'
 import { randomNum } from '../../server/utils'
@@ -20,7 +20,7 @@ function App() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [heroPalette, setHeroPalette] = useState(null)
-  const [userPalettes, setUserPalettes] = useState(null)
+  //   const [userPalettes, setUserPalettes] = useState(null)
   const { getAccessTokenSilently, isAuthenticated } = useAuth0()
   const token = useSelector((state) => state.loggedInUser.token)
 
@@ -42,15 +42,13 @@ function App() {
     }
   }, [isAuthenticated])
 
-  useEffect(async () => {
-    let palettes = await getPalettes(token)
-    setUserPalettes(palettes)
-  }, [token])
+  //   useEffect(async () => {
+  //     let palettes = await getPalettes(token)
+  //     setUserPalettes(palettes)
+  //   }, [token])
 
   useEffect(() => {
     let hero = defaultPalettes[randomNum(defaultPalettes)]
-    console.log(hero)
-
     setHeroPalette(hero)
   }, [])
 
@@ -62,10 +60,9 @@ function App() {
           path="/"
           element={heroPalette && <Home palette={heroPalette} />}
         />
-        <Route
-          path="/palettes"
-          element={<Palettes token={token} userPalettes={userPalettes} />}
-        />
+        {token && (
+          <Route path="/palettes" element={<Palettes token={token} />} />
+        )}
         <Route path="/generate" element={<Generate />} />
         <Route path="/register" element={<Register />} />
       </Routes>

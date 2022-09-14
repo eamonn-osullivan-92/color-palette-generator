@@ -25,7 +25,7 @@ router.post('/generatetarget', async (req, res) => {
     .set('Content-Type', 'application/json')
     .send(
       JSON.stringify({
-        model: 'default',
+        model: 'ui',
         input: newPalette,
       })
     )
