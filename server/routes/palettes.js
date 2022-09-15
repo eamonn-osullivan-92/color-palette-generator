@@ -19,13 +19,13 @@ router.get('/', checkJwt, (req, res) => {
 })
 
 router.post('/generatetarget', async (req, res) => {
-  const newPalette = req.body
+  const { newPalette, queryMode } = req.body
   const palette = await request
     .post('http://colormind.io/api/')
     .set('Content-Type', 'application/json')
     .send(
       JSON.stringify({
-        model: 'ui',
+        model: queryMode,
         input: newPalette,
       })
     )
@@ -47,8 +47,29 @@ router.post('/generate/save', checkJwt, (req, res) => {
     })
 })
 
-// TODO
-// delete
+// delete color from palettes
+router.delete('/del', checkJwt, (req, res) => {
+  let id = req.user?.sub
+  let { name } = req.body
+
+  console.log(id, name)
+
+  return db
+    .delPalette(name)
+    .then(() => {
+      return db.getPalettes(id)
+    })
+    .then((palettes) => {
+      let parsedColors = utils.parseColors(palettes)
+      console.log(parsedColors)
+      res.json(parsedColors)
+    })
+    .catch((err) => {
+      console.log(err)
+      res.send('Not good. ' + err.message)
+    })
+})
+
 // update
 
 module.exports = router

@@ -23,11 +23,12 @@ export async function generatePalette() {
   }
 }
 
-export async function generateTargetedPalette(newPalette) {
+export async function generateTargetedPalette(newPalette, queryMode) {
   try {
     const palette = await request
       .post(`${rootUrl}/palettes/generatetarget`)
-      .send(newPalette)
+      .send({ newPalette })
+      .send({ queryMode })
     const parsed = JSON.parse(palette.body)
     return parsed
   } catch (err) {
@@ -41,6 +42,18 @@ export async function savePalette(name, palette, token) {
       .post(`${rootUrl}/palettes/generate/save`)
       .send({ name, palette })
       .set('Authorization', `Bearer ${token}`)
+    return res.body
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
+export async function deletePalette(name, token) {
+  try {
+    const res = await request
+      .del(`${rootUrl}/palettes/del`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({ name })
     return res.body
   } catch (err) {
     console.log(err.message)

@@ -15,6 +15,10 @@ function addPalette(id, name, palette, db = conn) {
   // .insert('palettes', JSON.stringify(palette))
 }
 
+function delPalette(name, db = conn) {
+  return db('palettes').where('name', name).del()
+}
+
 function userExists(username, db = conn) {
   return db('users')
     .where('username', username)
@@ -29,4 +33,11 @@ function createUser(user, db = conn) {
   return db('users').insert(user)
 }
 
-module.exports = { getPalettes, addPalette, userExists, getUser, createUser }
+module.exports = {
+  getPalettes,
+  addPalette,
+  delPalette,
+  userExists,
+  getUser,
+  createUser,
+}

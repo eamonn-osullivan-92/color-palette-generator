@@ -124,6 +124,23 @@ a {
     gap: 2em;
 }
 
+.palette-heading {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.palette-name {
+margin: 0;
+padding: 10px 0;
+}
+
+.palette-heading button {
+    background: none;
+    border: none;
+    outline: none;
+}
+
 .palette {
     display: flex;
     height: 240px;
@@ -252,6 +269,13 @@ a {
     background-color: white;
     color: black;
     border: 2px solid black;
+}
+
+.generator-mode-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px
 }
 
 .tooltip-container {

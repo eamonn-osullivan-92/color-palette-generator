@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+
 import { generateTargetedPalette } from '../apiClient'
 import { rgbArraytoHexArray } from '../../server/utils'
 import GeneratedColor from './GeneratedColor'
@@ -14,6 +15,7 @@ export default function Generate() {
     '#1a1a1a',
   ])
   const [queryPalette, setQueryPalette] = useState(['N', 'N', 'N', 'N', 'N'])
+  const [queryMode, setQueryMode] = useState('default')
   const [isSave, setIsSave] = useState(false)
 
   const handleLockedPalettes = (index, color = 'N') => {
@@ -32,7 +34,7 @@ export default function Generate() {
 
   const handleGenerate = async (e) => {
     e.preventDefault()
-    const newPalette = await generateTargetedPalette(queryPalette)
+    const newPalette = await generateTargetedPalette(queryPalette, queryMode)
     resetLockedPalettes(newPalette.result)
 
     let targetedHex = rgbArraytoHexArray(newPalette.result)
@@ -44,7 +46,7 @@ export default function Generate() {
   }
 
   useEffect(async () => {
-    const newPalette = await generateTargetedPalette(queryPalette)
+    const newPalette = await generateTargetedPalette(queryPalette, queryMode)
     let targetedHex = rgbArraytoHexArray(newPalette.result)
     setGeneratedPalette(targetedHex)
   }, [])
@@ -70,6 +72,25 @@ export default function Generate() {
             <button className="save-palette-btn btn" onClick={handleIsSave}>
               Save
             </button>
+
+            <div className="generator-mode-container">
+              <input
+                type="radio"
+                value="default"
+                name="mode"
+                checked={queryMode == 'default'}
+                onChange={(e) => setQueryMode(e.target.value)}
+              />{' '}
+              Default
+              <input
+                type="radio"
+                value="ui"
+                name="mode"
+                checked={queryMode == 'ui'}
+                onChange={(e) => setQueryMode(e.target.value)}
+              />{' '}
+              UI
+            </div>
           </div>
           {isSave && (
             <SaveForm palette={generatedPalette} setIsSave={setIsSave} />

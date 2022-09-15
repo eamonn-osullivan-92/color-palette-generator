@@ -21,27 +21,35 @@ export default function Header() {
         <h1 className="main-title">Colour Palettes</h1>
         <nav className="nav">
           <ul className="nav-list">
-            <li className="list-item">
-              <a href="/">Home</a>
-            </li>
-            <li className="list-item">
-              <a href="/palettes">Palettes</a>
-            </li>
-            <li className="list-item">
-              <a href="/generate">Generate</a>
-            </li>
-            <li className="list-item">
-              <IfAuthenticated>
+            <IfAuthenticated>
+              <li className="list-item">
+                <a href="/">Home</a>
+              </li>
+              <li className="list-item">
+                <a href="/palettes">Palettes</a>
+              </li>
+              <li className="list-item">
+                <a href="/generate">Generate</a>
+              </li>
+              <li className="list-item">
                 <a href="/" onClick={handleLogOff}>
                   Log Out
                 </a>
-              </IfAuthenticated>
-              <IfNotAuthenticated>
+              </li>
+            </IfAuthenticated>
+            <IfNotAuthenticated>
+              <li className="list-item">
+                <a href="/">Home</a>
+              </li>
+              <li className="list-item">
+                <a href="/generate">Generate</a>
+              </li>
+              <li className="list-item">
                 <a href="/" onClick={handleSignIn}>
                   Sign In
                 </a>
-              </IfNotAuthenticated>
-            </li>
+              </li>
+            </IfNotAuthenticated>
           </ul>
         </nav>
       </header>
