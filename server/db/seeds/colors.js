@@ -7,7 +7,7 @@ exports.seed = async function (knex) {
   await knex('palettes').del()
   await knex('palettes').insert([
     {
-      id: 1,
+      name: 'default1',
       colors: JSON.stringify([
         '#CCD5AE',
         '#E9EDC9',
@@ -15,9 +15,10 @@ exports.seed = async function (knex) {
         '#FAEDCD',
         '#D4A373',
       ]),
+      added_by_user: 'default',
     },
     {
-      id: 2,
+      name: 'default2',
       colors: JSON.stringify([
         '#F08080',
         '#F4978E',
@@ -25,9 +26,10 @@ exports.seed = async function (knex) {
         '#FBC4AB',
         '#FFDAB9',
       ]),
+      added_by_user: 'default',
     },
     {
-      id: 3,
+      name: 'default3',
       colors: JSON.stringify([
         '#736CED',
         '#9F9FED',
@@ -35,9 +37,10 @@ exports.seed = async function (knex) {
         '#F2DFD7',
         '#FEF9FF',
       ]),
+      added_by_user: 'default',
     },
     {
-      id: 4,
+      name: 'default4',
       colors: JSON.stringify([
         '#EDEEC9',
         '#DDE7C7',
@@ -45,9 +48,10 @@ exports.seed = async function (knex) {
         '#98C9A3',
         '#77BFA3',
       ]),
+      added_by_user: 'default',
     },
     {
-      id: 5,
+      name: 'default5',
       colors: JSON.stringify([
         '#F9DC5C',
         '#FAE588',
@@ -55,6 +59,7 @@ exports.seed = async function (knex) {
         '#FCEFB4',
         '#FDF8E1',
       ]),
+      added_by_user: 'default',
     },
   ])
 }

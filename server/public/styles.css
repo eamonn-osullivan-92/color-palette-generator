@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400&display=swap');
 
 @font-face {
     font-family: 'ninetiesStuff';
@@ -8,7 +8,7 @@
   
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 16px;
     margin: 0 50px;
 }
@@ -100,7 +100,7 @@ a {
     outline: none;
     background-color: transparent;
     font-size: 1rem;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     border: 2px solid black;
     border-radius: 5px;
     padding: 10px 20px;
@@ -124,9 +124,26 @@ a {
     gap: 2em;
 }
 
+.palette-heading {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.palette-name {
+margin: 0;
+padding: 10px 0;
+}
+
+.palette-heading button {
+    background: none;
+    border: none;
+    outline: none;
+}
+
 .palette {
     display: flex;
-    height: 200px;
+    height: 240px;
     width: 90%;
 }
 
@@ -135,6 +152,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .color:first-child {
@@ -143,6 +161,26 @@ a {
 
 .color:last-child {
     border-radius: 0 5px 5px 0;
+}
+
+.palette-tools-container {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+    background-color: white;
+    opacity: 0.9;
+    height: 40px;
+    gap: 1em;
+}
+
+.palette-tools-container button {
+    background: none;
+    border: none;
+    outline: none;
 }
 
 /* generate */
@@ -179,6 +217,7 @@ a {
    align-items: center;
    justify-content: center;
     background-color: white;
+    opacity: 0.9;
 }
 
 .current-color {
@@ -232,6 +271,13 @@ a {
     border: 2px solid black;
 }
 
+.generator-mode-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px
+}
+
 .tooltip-container {
     width: 60%;
 }
@@ -245,7 +291,7 @@ span {
     display: inline-block;
 }
 
-/* .copy-tooltip {
+.copy-tooltip {
     visibility: hidden;
     width: 140px;
     background-color: #555;
@@ -263,7 +309,7 @@ span {
 }
 
 .copy-tooltip::after {
-    content: "";
+    content: "Copy Hex";
     position: absolute;
     top: 100%;
     left: 50%;
@@ -276,7 +322,7 @@ span {
 .copy-tooltip:hover {
     visibility: visible;
     opacity: 1;
-} */
+}
 
 
 

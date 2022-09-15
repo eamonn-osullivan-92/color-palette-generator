@@ -1,13 +1,15 @@
 const path = require('path')
 const express = require('express')
 
-const routes = require('./routes/routes.js')
+const palettes = require('./routes/palettes.js')
+const users = require('./routes/users.js')
 
 const server = express()
 
 server.use(express.json())
 server.use(express.static(path.join(__dirname, './public')))
-server.use('/api/v1/palettes', routes)
+server.use('/api/v1/palettes', palettes)
+server.use('/api/v1/users', users)
 
 //CAUSES API TO BREAK
 server.get('*', (req, res) => {
