@@ -73,8 +73,9 @@ export default function Generate() {
               Save
             </button>
 
-            <div className="generator-mode-container">
+            <div className="radio-control">
               <input
+                className="radio"
                 type="radio"
                 value="default"
                 name="mode"
@@ -83,6 +84,7 @@ export default function Generate() {
               />{' '}
               Default
               <input
+                className="radio"
                 type="radio"
                 value="ui"
                 name="mode"
