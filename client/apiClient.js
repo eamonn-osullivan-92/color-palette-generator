@@ -24,11 +24,20 @@ export async function generatePalette() {
 }
 
 export async function generateTargetedPalette(newPalette, queryMode) {
+  console.log(newPalette)
+  let palette
   try {
-    const palette = await request
-      .post(`${rootUrl}/palettes/generatetarget`)
-      .send({ newPalette })
-      .send({ queryMode })
+    if (newPalette) {
+      palette = await request
+        .post(`${rootUrl}/palettes/generatetarget`)
+        .send({ newPalette })
+        .send({ queryMode })
+    } else {
+      palette = await request
+        .post(`${rootUrl}/palettes/generatetarget`)
+        .send({ queryMode })
+    }
+    console.log(palette)
     const parsed = JSON.parse(palette.body)
     return parsed
   } catch (err) {

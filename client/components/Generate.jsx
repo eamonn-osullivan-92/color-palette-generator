@@ -34,7 +34,12 @@ export default function Generate() {
 
   const handleGenerate = async (e) => {
     e.preventDefault()
-    const newPalette = await generateTargetedPalette(queryPalette, queryMode)
+    // sending query with only 'N' values limits the color responses, so the below logic is to send a query palette only when certain colors are locked.
+    let searchPalette
+    queryPalette.find((elm) => elm !== 'N')
+      ? (searchPalette = queryPalette)
+      : null
+    const newPalette = await generateTargetedPalette(searchPalette, queryMode)
     resetLockedPalettes(newPalette.result)
 
     let targetedHex = rgbArraytoHexArray(newPalette.result)
@@ -46,7 +51,7 @@ export default function Generate() {
   }
 
   useEffect(async () => {
-    const newPalette = await generateTargetedPalette(queryPalette, queryMode)
+    const newPalette = await generateTargetedPalette(null, queryMode)
     let targetedHex = rgbArraytoHexArray(newPalette.result)
     setGeneratedPalette(targetedHex)
   }, [])

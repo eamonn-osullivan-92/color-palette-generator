@@ -1,5 +1,3 @@
-const fetch = require('node-fetch')
-
 function randomNum(array) {
   return Math.floor(Math.random() * array.length)
 }
@@ -42,65 +40,10 @@ function parseColors(array) {
   return array
 }
 
-// user selects a start and end color and colormind will fill the gaps with like colors. i.e. user supplies color 1 and 5, colormind provides color 2, 3, 4
-
-function fetchTargetedPalette(color1, color2) {
-  //convert hex to rgb array
-  let colorOne = hexToRgb(color1)
-  let colorTwo = hexToRgb(color2)
-
-  // takes in two colours
-  let colors = fetch('http://colormind.io/api/', {
-    method: 'POST',
-    body: JSON.stringify({
-      input: [colorOne, 'N', 'N', 'N', colorTwo],
-      model: 'ui',
-    }),
-  })
-    .then((response) => {
-      return response.json()
-    })
-    .then((response) => {
-      let colors = rgbArraytoHexArray(response.result)
-      return { colors }
-    })
-  return colors
-}
-
 module.exports = {
-  fetchTargetedPalette,
   randomNum,
   parseColors,
   rgbArraytoHexArray,
   rgbToHex,
   hexToRgb,
 }
-
-//async version
-// async function fetchRandomPalette() {
-// 	let colors = await fetch('http://colormind.io/api/', {
-// 		method: 'POST',
-// 		body: JSON.stringify({ model: 'ui' }),
-// 	})
-// 		.then((response) => {
-// 			return response.json()
-// 		})
-// 		.then((response) => {
-// 			let colors = rgbArraytoHexArray(response.result)
-// 			return { colors }
-// 		})
-// 	return colors
-// }
-
-// async version
-// router.get('/generate', async (req, res) => {
-// 	utils
-// 		.fetchRandomPalette()
-// 		.then((palette) => {
-// 			res.render('generate', palette)
-// 		})
-// 		.catch((err) => {
-// 			console.log(err)
-// 			res.send('Not good. ' + err.message)
-// 		})
-// })

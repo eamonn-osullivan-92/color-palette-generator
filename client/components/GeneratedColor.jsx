@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { HexColorPicker, HexColorInput } from 'react-colorful'
 import { hexToRgb } from '../../server/utils'
 
+import { motion } from 'framer-motion'
+
 export default function GeneratedColor({
   index,
   currentColor,
@@ -29,12 +31,15 @@ export default function GeneratedColor({
 
   return (
     <div className="generated-color-container">
-      <div
+      <motion.div
         className="generated-color"
         style={{
           backgroundColor: `${color}`,
         }}
-      ></div>
+        initial={{ x: -100, scaleX: 0 }}
+        animate={{ x: 0, scaleX: 1 }}
+        transition={{ ease: 'linear' }}
+      ></motion.div>
       <div className="color-tools-container">
         <div className="selector-button-container">
           <div className="current-color">{color.toUpperCase()}</div>
