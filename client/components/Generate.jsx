@@ -5,6 +5,7 @@ import { rgbArraytoHexArray } from '../../server/utils'
 import GeneratedColor from './GeneratedColor'
 import Tooltip from './Tooltip'
 import SaveForm from './SaveForm'
+import Template from './Template'
 
 export default function Generate() {
   const [generatedPalette, setGeneratedPalette] = useState([
@@ -17,6 +18,13 @@ export default function Generate() {
   const [queryPalette, setQueryPalette] = useState(['N', 'N', 'N', 'N', 'N'])
   const [queryMode, setQueryMode] = useState('default')
   const [isSave, setIsSave] = useState(false)
+  const [userInputPalette, setUserInputPalette] = useState([
+    null,
+    null,
+    null,
+    null,
+    null,
+  ])
 
   const handleLockedPalettes = (index, color = 'N') => {
     queryPalette[index] = color
@@ -50,6 +58,12 @@ export default function Generate() {
     setIsSave((prevState) => !prevState)
   }
 
+  const handleUserInputPalettes = (color, index) => {
+    let updated = [...userInputPalette]
+    updated[index] = color
+    setUserInputPalette(updated)
+  }
+
   useEffect(async () => {
     const newPalette = await generateTargetedPalette(null, queryMode)
     let targetedHex = rgbArraytoHexArray(newPalette.result)
@@ -67,6 +81,7 @@ export default function Generate() {
                 currentColor={color}
                 key={color}
                 handleLockedPalettes={handleLockedPalettes}
+                handleUserInputPalettes={handleUserInputPalettes}
               />
             ))}
           </div>
@@ -100,11 +115,16 @@ export default function Generate() {
             </div>
           </div>
           {isSave && (
-            <SaveForm palette={generatedPalette} setIsSave={setIsSave} />
+            <SaveForm
+              userPalette={userInputPalette}
+              generatedPalette={generatedPalette}
+              setIsSave={setIsSave}
+            />
           )}
         </div>
       )}
       <Tooltip />
+      <Template palette={generatedPalette} />
     </>
   )
 }

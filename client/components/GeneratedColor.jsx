@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { HexColorPicker, HexColorInput } from 'react-colorful'
 import { hexToRgb } from '../../server/utils'
 
@@ -8,6 +8,7 @@ export default function GeneratedColor({
   index,
   currentColor,
   handleLockedPalettes,
+  handleUserInputPalettes,
 }) {
   const [color, setColor] = useState(currentColor)
   const [isSelector, setIsSelector] = useState(false)
@@ -15,6 +16,10 @@ export default function GeneratedColor({
 
   const handleCopy = () => {
     navigator.clipboard.writeText(color)
+  }
+
+  const handleSelector = () => {
+    setIsSelector((prev) => !prev)
   }
 
   const handleLock = () => {
@@ -28,6 +33,12 @@ export default function GeneratedColor({
       : handleLockedPalettes(index, hexToRgb(color))
     setIsLocked((current) => !current)
   }
+
+  useEffect(() => {
+    if (color) {
+      handleUserInputPalettes(color, index)
+    }
+  }, [color])
 
   return (
     <div className="generated-color-container">
@@ -47,10 +58,7 @@ export default function GeneratedColor({
             <span className="copy-tooltip">Copy Hex</span>
             <span className="material-icons">content_copy</span>
           </button>
-          <button
-            onClick={() => setIsSelector(!isSelector)}
-            className="change-color"
-          >
+          <button onClick={handleSelector} className="change-color">
             <span className="material-symbols-outlined">edit</span>
           </button>
           <button className="lock-color" onClick={handleLock}>
