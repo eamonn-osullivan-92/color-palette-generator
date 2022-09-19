@@ -49,7 +49,9 @@ function Register() {
           onChange={handleChange}
         />
 
-        <button disabled={!form.username}>Save profile</button>
+        <button disabled={!form.username} className="btn-primary">
+          Save profile
+        </button>
       </form>
     </div>
   )

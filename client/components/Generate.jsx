@@ -18,6 +18,7 @@ export default function Generate() {
   const [queryPalette, setQueryPalette] = useState(['N', 'N', 'N', 'N', 'N'])
   const [queryMode, setQueryMode] = useState('default')
   const [isSave, setIsSave] = useState(false)
+  // register user selected colors to be used when saving palettes. React-colorful hex picker does not allow the generated palette variable to be changed when updating colors.
   const [userInputPalette, setUserInputPalette] = useState([
     null,
     null,
@@ -86,10 +87,10 @@ export default function Generate() {
             ))}
           </div>
           <div className="generate-button-container">
-            <button className="fetch-generate-btn btn" onClick={handleGenerate}>
+            <button className="btn btn-primary" onClick={handleGenerate}>
               Generate
             </button>
-            <button className="save-palette-btn btn" onClick={handleIsSave}>
+            <button className=" btn" onClick={handleIsSave}>
               Save
             </button>
 
@@ -123,8 +124,10 @@ export default function Generate() {
           )}
         </div>
       )}
-      <Tooltip />
-      <Template palette={generatedPalette} />
+      <div className="container-flex-row">
+        <Tooltip />
+        <Template palette={generatedPalette} />
+      </div>
     </>
   )
 }
