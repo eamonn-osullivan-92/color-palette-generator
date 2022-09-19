@@ -29,9 +29,6 @@ export default function Header() {
                 <a href="/palettes">Palettes</a>
               </li>
               <li className="list-item">
-                <a href="/generate">Generate</a>
-              </li>
-              <li className="list-item">
                 <a href="/" onClick={handleLogOff}>
                   Log Out
                 </a>
@@ -40,9 +37,6 @@ export default function Header() {
             <IfNotAuthenticated>
               <li className="list-item">
                 <a href="/">Home</a>
-              </li>
-              <li className="list-item">
-                <a href="/generate">Generate</a>
               </li>
               <li className="list-item">
                 <a href="/" onClick={handleSignIn}>

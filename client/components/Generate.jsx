@@ -5,6 +5,7 @@ import { rgbArraytoHexArray } from '../../server/utils'
 import GeneratedColor from './GeneratedColor'
 import Tooltip from './Tooltip'
 import SaveForm from './SaveForm'
+import Template from './Template'
 
 export default function Generate() {
   const [generatedPalette, setGeneratedPalette] = useState([
@@ -17,6 +18,14 @@ export default function Generate() {
   const [queryPalette, setQueryPalette] = useState(['N', 'N', 'N', 'N', 'N'])
   const [queryMode, setQueryMode] = useState('default')
   const [isSave, setIsSave] = useState(false)
+  // register user selected colors to be used when saving palettes. React-colorful hex picker does not allow the generated palette variable to be changed when updating colors.
+  const [userInputPalette, setUserInputPalette] = useState([
+    null,
+    null,
+    null,
+    null,
+    null,
+  ])
 
   const handleLockedPalettes = (index, color = 'N') => {
     queryPalette[index] = color
@@ -34,7 +43,12 @@ export default function Generate() {
 
   const handleGenerate = async (e) => {
     e.preventDefault()
-    const newPalette = await generateTargetedPalette(queryPalette, queryMode)
+    // sending query with only 'N' values limits the color responses, so the below logic is to send a query palette only when certain colors are locked.
+    let searchPalette
+    queryPalette.find((elm) => elm !== 'N')
+      ? (searchPalette = queryPalette)
+      : null
+    const newPalette = await generateTargetedPalette(searchPalette, queryMode)
     resetLockedPalettes(newPalette.result)
 
     let targetedHex = rgbArraytoHexArray(newPalette.result)
@@ -45,8 +59,14 @@ export default function Generate() {
     setIsSave((prevState) => !prevState)
   }
 
+  const handleUserInputPalettes = (color, index) => {
+    let updated = [...userInputPalette]
+    updated[index] = color
+    setUserInputPalette(updated)
+  }
+
   useEffect(async () => {
-    const newPalette = await generateTargetedPalette(queryPalette, queryMode)
+    const newPalette = await generateTargetedPalette(null, queryMode)
     let targetedHex = rgbArraytoHexArray(newPalette.result)
     setGeneratedPalette(targetedHex)
   }, [])
@@ -62,19 +82,21 @@ export default function Generate() {
                 currentColor={color}
                 key={color}
                 handleLockedPalettes={handleLockedPalettes}
+                handleUserInputPalettes={handleUserInputPalettes}
               />
             ))}
           </div>
           <div className="generate-button-container">
-            <button className="fetch-generate-btn btn" onClick={handleGenerate}>
+            <button className="btn btn-primary" onClick={handleGenerate}>
               Generate
             </button>
-            <button className="save-palette-btn btn" onClick={handleIsSave}>
+            <button className=" btn" onClick={handleIsSave}>
               Save
             </button>
 
-            <div className="generator-mode-container">
+            <div className="radio-control">
               <input
+                className="radio"
                 type="radio"
                 value="default"
                 name="mode"
@@ -83,6 +105,7 @@ export default function Generate() {
               />{' '}
               Default
               <input
+                className="radio"
                 type="radio"
                 value="ui"
                 name="mode"
@@ -93,11 +116,18 @@ export default function Generate() {
             </div>
           </div>
           {isSave && (
-            <SaveForm palette={generatedPalette} setIsSave={setIsSave} />
+            <SaveForm
+              userPalette={userInputPalette}
+              generatedPalette={generatedPalette}
+              setIsSave={setIsSave}
+            />
           )}
         </div>
       )}
-      <Tooltip />
+      <div className="container-flex-row">
+        <Tooltip />
+        <Template palette={generatedPalette} />
+      </div>
     </>
   )
 }
