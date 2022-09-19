@@ -11,6 +11,7 @@ body {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     margin: 0 50px;
+    padding-bottom: 100px;
 }
 
 a {
@@ -214,6 +215,23 @@ padding: 10px 0;
     border: 2px solid black;
 }
 
+.save-modal {
+    margin-top: 1em;
+
+}
+
+.save-modal input {
+    margin-right: 1em;
+}
+
+.confirm-save-btn {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    padding: 3px 5px;
+    border-radius: 3px;
+}
+
 .radio-control {
     display: flex;
     align-items: center;
@@ -359,12 +377,41 @@ span {
     border-radius: 5px;
     padding: 7px 15px;
     cursor: pointer;
+    min-width: 100px;
 }
 
 .btn-primary {
     background-color: black;
     color: white;
     border: 2px solid black;
+}
+
+/* register */
+
+.register-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-form-container {
+    width: 350px;
+    height: 200px;
+    border-radius: 7px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    padding: 1em 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.register-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
 }
 
 @media (max-width: 1200px) {

@@ -37,22 +37,25 @@ function Register() {
 
   return (
     <div className="register-container">
-      <h2>Complete profile set up</h2>
+      <div className="register-form-container">
+        <h2>Complete profile set up:</h2>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username: </label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={form.username}
-          onChange={handleChange}
-        />
-
-        <button disabled={!form.username} className="btn-primary">
-          Save profile
-        </button>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="username">Username: </label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={form.username}
+            onChange={handleChange}
+          />
+          <div className="register-button-container">
+            <button disabled={!form.username} className="btn btn-primary">
+              Save profile
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

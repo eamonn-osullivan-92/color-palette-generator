@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 import { generateTargetedPalette } from '../apiClient'
 import { rgbArraytoHexArray } from '../../server/utils'
@@ -8,6 +9,7 @@ import SaveForm from './SaveForm'
 import Template from './Template'
 
 export default function Generate() {
+  const userId = useSelector((redux) => redux.loggedInUser.auth0Id)
   const [generatedPalette, setGeneratedPalette] = useState([
     '#f5f5f5',
     '#dbdbdb',
@@ -16,7 +18,7 @@ export default function Generate() {
     '#1a1a1a',
   ])
   const [queryPalette, setQueryPalette] = useState(['N', 'N', 'N', 'N', 'N'])
-  const [queryMode, setQueryMode] = useState('default')
+  const [queryMode, setQueryMode] = useState('ui')
   const [isSave, setIsSave] = useState(false)
   // register user selected colors to be used when saving palettes. React-colorful hex picker does not allow the generated palette variable to be changed when updating colors.
   const [userInputPalette, setUserInputPalette] = useState([
@@ -38,21 +40,21 @@ export default function Generate() {
         newPalette[index] = color
       }
     })
+
     return newPalette
   }
 
   const handleGenerate = async (e) => {
     e.preventDefault()
-    // sending query with only 'N' values limits the color responses, so the below logic is to send a query palette only when certain colors are locked.
+    // sending query with only 'N' values limits the color responses - the below logic is to send a query palette only when certain colors are locked.
     let searchPalette
     queryPalette.find((elm) => elm !== 'N')
       ? (searchPalette = queryPalette)
       : null
     const newPalette = await generateTargetedPalette(searchPalette, queryMode)
     resetLockedPalettes(newPalette.result)
-
-    let targetedHex = rgbArraytoHexArray(newPalette.result)
-    setGeneratedPalette(targetedHex)
+    let hexArray = rgbArraytoHexArray(newPalette.result)
+    setGeneratedPalette(hexArray)
   }
 
   const handleIsSave = () => {
@@ -61,6 +63,7 @@ export default function Generate() {
 
   const handleUserInputPalettes = (color, index) => {
     let updated = [...userInputPalette]
+
     updated[index] = color
     setUserInputPalette(updated)
   }
@@ -81,6 +84,7 @@ export default function Generate() {
                 index={index}
                 currentColor={color}
                 key={color}
+                queryPalette={queryPalette}
                 handleLockedPalettes={handleLockedPalettes}
                 handleUserInputPalettes={handleUserInputPalettes}
               />
@@ -90,10 +94,11 @@ export default function Generate() {
             <button className="btn btn-primary" onClick={handleGenerate}>
               Generate
             </button>
-            <button className=" btn" onClick={handleIsSave}>
-              Save
-            </button>
-
+            {userId && (
+              <button className=" btn" onClick={handleIsSave}>
+                Save
+              </button>
+            )}
             <div className="radio-control">
               <input
                 className="radio"

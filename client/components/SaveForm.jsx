@@ -27,7 +27,7 @@ export default function SaveForm({ userPalette, generatedPalette, setIsSave }) {
           onChange={(e) => setName(e.target.value)}
         />
 
-        <button className="btn-primary">Confirm</button>
+        <button className="confirm-save-btn">Confirm</button>
       </form>
     </div>
   )
