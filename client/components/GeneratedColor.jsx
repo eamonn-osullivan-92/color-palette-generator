@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { HexColorPicker, HexColorInput } from 'react-colorful'
-import { hexToRgb } from '../../server/utils'
+import { hexToRgb, rgbToHex } from '../../server/utils'
 
 import { motion } from 'framer-motion'
 
 export default function GeneratedColor({
   index,
   currentColor,
+  queryPalette,
   handleLockedPalettes,
   handleUserInputPalettes,
 }) {
@@ -20,17 +21,18 @@ export default function GeneratedColor({
 
   const handleSelector = () => {
     setIsSelector((prev) => !prev)
+    // setIsLocked((prev) => !prev)
   }
 
   const handleLock = () => {
     // set lock to true/false
-    // if true, set locked color, else set to N\
+    // if true, set locked color, else set to N
     // Below code is working, but reads backwards
     // changing color before locking will cause lock to reset but query will stay locked.
 
     isLocked
       ? handleLockedPalettes(index, 'N')
-      : handleLockedPalettes(index, hexToRgb(color))
+      : handleLockedPalettes(index, hexToRgb(color.toUpperCase()))
     setIsLocked((current) => !current)
   }
 
@@ -71,8 +73,12 @@ export default function GeneratedColor({
         </div>
       </div>
       <div className="color-picker-selector">
-        {isSelector && <HexColorPicker color={color} onChange={setColor} />}
-        {isSelector && <HexColorInput color={color} onChange={setColor} />}
+        {isSelector && (
+          <HexColorPicker color={color.toUpperCase()} onChange={setColor} />
+        )}
+        {isSelector && (
+          <HexColorInput color={color.toUpperCase()} onChange={setColor} />
+        )}
       </div>
     </div>
   )
