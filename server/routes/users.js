@@ -21,8 +21,7 @@ router.get('/', checkJwt, (req, res) => {
 
 // POST /api/v1/users
 router.post('/', checkJwt, (req, res) => {
-  // const auth0_id = req.user?.sub <-- bring this back in now that we have checkJwt
-  const auth0_id = req.body.auth0Id
+  const auth0_id = req.user?.sub
   console.log('route call: ' + auth0_id)
   const { username } = req.body
   const userDetails = {

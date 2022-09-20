@@ -80,7 +80,6 @@ export async function getUser(token) {
 }
 
 export async function addUser(user, token) {
-  console.log(user)
   try {
     return await request
       .post(`${rootUrl}/users`)
