@@ -7,11 +7,14 @@ function getPalettes(id, db = conn) {
 }
 
 function addPalette(id, name, palette, db = conn) {
-  return db('palettes').insert({
-    name: name,
-    colors: JSON.stringify(palette),
-    added_by_user: id,
-  })
+  return db('palettes').insert(
+    {
+      name: name,
+      colors: JSON.stringify(palette),
+      added_by_user: id,
+    },
+    'id'
+  )
   // .insert('palettes', JSON.stringify(palette))
 }
 
@@ -30,7 +33,7 @@ function getUser(id, db = conn) {
 }
 
 function createUser(user, db = conn) {
-  return db('users').insert(user)
+  return db('users').insert(user, 'id')
 }
 
 module.exports = {
