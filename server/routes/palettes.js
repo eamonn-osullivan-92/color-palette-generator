@@ -52,8 +52,6 @@ router.delete('/del', checkJwt, (req, res) => {
   let id = req.user?.sub
   let { name } = req.body
 
-  console.log(id, name)
-
   return db
     .delPalette(name)
     .then(() => {
@@ -61,7 +59,6 @@ router.delete('/del', checkJwt, (req, res) => {
     })
     .then((palettes) => {
       let parsedColors = utils.parseColors(palettes)
-      console.log(parsedColors)
       res.json(parsedColors)
     })
     .catch((err) => {
