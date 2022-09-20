@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { HexColorPicker, HexColorInput } from 'react-colorful'
-import { hexToRgb, rgbToHex } from '../../server/utils'
+import { hexToRgb } from '../../server/utils'
 
 import { motion } from 'framer-motion'
 
 export default function GeneratedColor({
   index,
   currentColor,
-  queryPalette,
   handleLockedPalettes,
   handleUserInputPalettes,
 }) {
