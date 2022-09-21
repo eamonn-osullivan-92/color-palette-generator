@@ -18,9 +18,6 @@ export default function Generate() {
     '#1a1a1a',
   ])
   const [queryPalette, setQueryPalette] = useState(['N', 'N', 'N', 'N', 'N'])
-  const [queryMode, setQueryMode] = useState('ui')
-  const [isSave, setIsSave] = useState(false)
-  // register user selected colors to be used when saving palettes. React-colorful hex picker does not allow the generated palette variable to be changed when updating colors.
   const [userInputPalette, setUserInputPalette] = useState([
     null,
     null,
@@ -28,8 +25,25 @@ export default function Generate() {
     null,
     null,
   ])
+  const [lockedPalettes, setLockedPalettes] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+  ])
+  const [queryMode, setQueryMode] = useState('ui')
+  const [isSave, setIsSave] = useState(false)
+  // register user selected colors to be used when saving palettes. React-colorful hex picker does not allow the generated palette variable to be changed when updating colors.
 
-  const handleLockedPalettes = (index, color = 'N') => {
+  const handleLockedPaletteArray = (colorLockValue, index) => {
+    // updates an array of locked values for each color. This value is passed through as a prop to update each color with the correct lock value on re-render.
+    let lockedArray = [...lockedPalettes]
+    lockedArray[index] = colorLockValue
+    setLockedPalettes(lockedArray)
+  }
+
+  const handleQueryPalette = (index, color = 'N') => {
     queryPalette[index] = color
     setQueryPalette(queryPalette)
   }
@@ -40,7 +54,6 @@ export default function Generate() {
         newPalette[index] = color
       }
     })
-
     return newPalette
   }
 
@@ -63,7 +76,6 @@ export default function Generate() {
 
   const handleUserInputPalettes = (color, index) => {
     let updated = [...userInputPalette]
-
     updated[index] = color
     setUserInputPalette(updated)
   }
@@ -84,8 +96,10 @@ export default function Generate() {
                 index={index}
                 currentColor={color}
                 key={color}
-                queryPalette={queryPalette}
-                handleLockedPalettes={handleLockedPalettes}
+                lockedValue={lockedPalettes[index]}
+                handleLockedPaletteArray={handleLockedPaletteArray}
+                setLockedPalettes={setLockedPalettes}
+                handleQueryPalette={handleQueryPalette}
                 handleUserInputPalettes={handleUserInputPalettes}
               />
             ))}
