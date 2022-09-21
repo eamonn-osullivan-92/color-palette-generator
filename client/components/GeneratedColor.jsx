@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { HexColorPicker, HexColorInput } from 'react-colorful'
 import { hexToRgb } from '../../server/utils'
-
 import { motion } from 'framer-motion'
 
 export default function GeneratedColor({
   index,
   currentColor,
-  handleLockedPalettes,
+  handleQueryPalette,
+  handleLockedPaletteArray,
+  lockedValue,
   handleUserInputPalettes,
 }) {
   const [color, setColor] = useState(currentColor)
   const [isSelector, setIsSelector] = useState(false)
-  const [isLocked, setIsLocked] = useState(false)
+  const [isFirstRender, setIsFirstRender] = useState(true)
 
   const handleCopy = () => {
     navigator.clipboard.writeText(color)
@@ -20,25 +21,23 @@ export default function GeneratedColor({
 
   const handleSelector = () => {
     setIsSelector((prev) => !prev)
-    // setIsLocked((prev) => !prev)
   }
 
   const handleLock = () => {
-    // set lock to true/false
-    // if true, set locked color, else set to N
-    // Below code is working, but reads backwards
-    // changing color before locking will cause lock to reset but query will stay locked.
-
-    isLocked
-      ? handleLockedPalettes(index, 'N')
-      : handleLockedPalettes(index, hexToRgb(color.toUpperCase()))
-    setIsLocked((current) => !current)
+    //sends color through to the query palette when locking.
+    // Updates the locked array state in Generate so lock state will carry through on re-render.
+    lockedValue
+      ? handleQueryPalette(index, 'N')
+      : handleQueryPalette(index, hexToRgb(color))
+    handleLockedPaletteArray(!lockedValue, index)
   }
 
   useEffect(() => {
-    if (color) {
-      handleUserInputPalettes(color, index)
+    if (!isFirstRender) {
+      handleUserInputPalettes(color.toUpperCase(), index)
+      handleLockedPaletteArray(false, index)
     }
+    setIsFirstRender(false)
   }, [color])
 
   return (
@@ -63,7 +62,7 @@ export default function GeneratedColor({
             <span className="material-symbols-outlined">edit</span>
           </button>
           <button className="lock-color" onClick={handleLock}>
-            {isLocked ? (
+            {lockedValue ? (
               <span className="material-icons locked-icon">lock</span>
             ) : (
               <span className="material-icons ">lock_open</span>

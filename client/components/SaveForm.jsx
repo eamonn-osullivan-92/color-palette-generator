@@ -11,7 +11,6 @@ export default function SaveForm({ userPalette, generatedPalette, setIsSave }) {
     let palette = generatedPalette.map((color, index) =>
       userPalette[index] !== null ? (color = userPalette[index]) : color
     )
-    console.log(palette)
     savePalette(name, palette, token)
     setIsSave((prevState) => !prevState)
   }
