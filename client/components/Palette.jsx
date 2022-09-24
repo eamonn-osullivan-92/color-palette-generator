@@ -23,7 +23,7 @@ export default function Palette({ palette, token, setUserPalettes }) {
             style={{ backgroundColor: `${color}` }}
           >
             <div className="palette-tools-container">
-              <div className="current-color">{color.toUpperCase()}</div>
+              <div className="palette-current-color">{color.toUpperCase()}</div>
 
               <button className="copy-btn">
                 <span className="copy-tooltip">Copy Hex</span>
