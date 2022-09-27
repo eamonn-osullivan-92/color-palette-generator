@@ -35,7 +35,10 @@ export default function GeneratedColor({
   useEffect(() => {
     if (!isFirstRender) {
       handleUserInputPalettes(color.toUpperCase(), index)
+
+      // reset lock and query palette until user relocks (on final color)
       handleLockedPaletteArray(false, index)
+      handleQueryPalette(index, 'N')
     }
     setIsFirstRender(false)
   }, [color])
