@@ -1,5 +1,7 @@
 Personal Color Palette Generator.
 
+https://colorful-life.herokuapp.com/
+
 Generate and save your favourite palettes. 
 
 If you have a specific color scheme in mind, you can select your desired colors and lock it. The position of locked colors does influence the generated palette so experiment with different positions.
