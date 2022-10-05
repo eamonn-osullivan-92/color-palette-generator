@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { deletePalette } from '../apiClient'
 
 export default function Palette({ palette, token, setUserPalettes }) {
