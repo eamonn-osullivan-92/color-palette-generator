@@ -22,11 +22,11 @@ function App() {
   const [userPalettes, setUserPalettes] = useState(null)
 
   useEffect(() => {
-    user &&
+    user.token &&
       getPalettes(user.token).then((palettes) => {
         setUserPalettes(palettes)
       })
-  }, [user, userPalettes])
+  }, [user.token, userPalettes])
 
   useEffect(async () => {
     try {
