@@ -21,6 +21,12 @@ export default function Tooltip() {
         The generator utilises the Colormind API. For more info visit
         <a href="http://colormind.io/"> Colormind.io.</a>
       </p>
+
+      <p>
+        <span className="bold">Note: </span> Authentication and the save feature
+        does not currently work on Safari or iOS devices. I apologise for any
+        incovenience.
+      </p>
     </div>
   )
 }

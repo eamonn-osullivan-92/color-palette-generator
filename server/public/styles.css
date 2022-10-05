@@ -414,6 +414,10 @@ span {
     margin-top: 1em;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 @media (max-width: 1200px) {
     .current-color{
         display: none;
