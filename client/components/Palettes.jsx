@@ -2,14 +2,14 @@ import React from 'react'
 
 import Palette from './Palette'
 
-export default function Palettes({ palettes, user, setUserPalettes }) {
+export default function Palettes({ palettes, token, setUserPalettes }) {
   return (
     <div className="container">
       {palettes ? (
         palettes.map((palette) => (
           <Palette
             palette={palette}
-            token={user.token}
+            token={token}
             setUserPalettes={setUserPalettes}
             key={palette.name}
           />
