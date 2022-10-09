@@ -136,7 +136,8 @@ a {
 /* generate */
 
 .generate-container {
-    height: 350px;
+   min-height: 350px;
+   height: auto;
     width: 100%;
 }
 
@@ -229,13 +230,16 @@ a {
 
 .save-modal input {
     margin-right: 1em;
+    padding: 5px 7px;
+    outline: none;
+    /* border-radius: 3px; */
 }
 
 .confirm-save-btn {
     background-color: var(--dark-primary);
     color: white;
     border: 1px solid var(--dark-primary);
-    padding: 3px 5px;
+    padding: 5px 7px;
     border-radius: 3px;
 }
 
@@ -287,6 +291,10 @@ input[type="radio"] {
 
 .tooltip-container {
     width: 60%;
+}
+
+.tooltip-heading {
+    font-size: 22px;
 }
 
 .tooltip-container p {
@@ -429,20 +437,20 @@ span {
     font-weight: bold;
 }
 
-@media (max-width: 1200px) {
+@media screen and (max-width: 1200px) {
     .current-color{
         display: none;
     }
 }
 
-@media (max-width: 1100px) {
+@media screen and (max-width: 1100px) {
     .color {
         width: 150px;
         height: 200px;
     }
 }
 
-@media (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
     .container-flex-row {
         flex-direction: column;
         padding-top: 2em;
@@ -458,11 +466,17 @@ span {
     }
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
+
+    .save-modal {
+        margin-top: 0;
+    } 
+
+
     .generate-button-container {
         flex-direction: column;
         width: 100%;
-        gap: 20px;
+        padding-bottom: 2em;
     }
 
     .generate-btn {
