@@ -1,10 +1,10 @@
 {
-    "name": "Colorful life",
+    "name": "color-palette-generator",
     "version": "0.2.2",
-    "description": "Colorful life",
+    "description": "Color palette generator",
     "repository": "https://github.com/eosullivan92/color-palette-generator",
     "main": "server/index.js",
-    "author": "Eamonn O'Sullivan",
+    "author": "eosullivan92",
     "license": "ISC",
     "scripts": {
         "client": "webpack serve --hot --config ./client/webpack.config.js",
