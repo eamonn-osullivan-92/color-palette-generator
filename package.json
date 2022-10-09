@@ -1,10 +1,10 @@
 {
-    "name": "Colorful life",
+    "name": "consuming-external-apis",
     "version": "0.2.2",
-    "description": "Colorful life",
-    "repository": "https://github.com/eosullivan92/color-palette-generator",
+    "description": "Consuming External APIs",
+    "repository": "https://github.com/dev-academy-challenges/consuming-external-apis.git",
     "main": "server/index.js",
-    "author": "Eamonn O'Sullivan",
+    "author": "Dev Academy Aotearoa",
     "license": "ISC",
     "scripts": {
         "client": "webpack serve --hot --config ./client/webpack.config.js",
