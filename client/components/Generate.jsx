@@ -105,7 +105,10 @@ export default function Generate() {
             ))}
           </div>
           <div className="generate-button-container">
-            <button className="btn btn-primary" onClick={handleGenerate}>
+            <button
+              className="btn btn-primary generate-btn"
+              onClick={handleGenerate}
+            >
               Generate
             </button>
             {userId && (

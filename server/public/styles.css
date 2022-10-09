@@ -5,6 +5,12 @@
     src: url(./fonts/NinetiesStuffDemoRegular.woff) format('woff');
     
   }
+
+:root {
+    --dark-primary: #222222;
+    --dark-secondary: #3B3B3B;
+}
+
   
 
 body {
@@ -12,6 +18,7 @@ body {
     font-size: 16px;
     margin: 0 50px;
     padding-bottom: 100px;
+    color: var(--dark-secondary)
 }
 
 a {
@@ -53,7 +60,7 @@ a {
 
 .list-item a {
     text-decoration: none;
-    color: black;
+    color: var(--dark-primary);
 }
 
 
@@ -74,8 +81,8 @@ a {
 }
 
 .palette-name {
-margin: 0;
-padding: 10px 0;
+    margin: 0;
+    padding: 10px 0;
 }
 
 .palette-heading button {
@@ -200,7 +207,7 @@ padding: 10px 0;
 }
 .fetch-generate-btn, .save-palette-btn {
     outline: none;
-    background-color: black;
+    background-color: var(--dark-primary);;
     color: white;
     font-size: 1rem;
     font-family: Arial, Helvetica, sans-serif;
@@ -211,8 +218,8 @@ padding: 10px 0;
 }
 .save-palette-btn {
     background-color: white;
-    color: black;
-    border: 2px solid black;
+    color: var(--dark-primary);
+    border: 2px solid var(--dark-primary);
 }
 
 .save-modal {
@@ -225,9 +232,9 @@ padding: 10px 0;
 }
 
 .confirm-save-btn {
-    background-color: black;
+    background-color: var(--dark-primary);
     color: white;
-    border: 1px solid black;
+    border: 1px solid var(--dark-primary);
     padding: 3px 5px;
     border-radius: 3px;
 }
@@ -248,7 +255,7 @@ input[type="radio"] {
     font: inherit;
   width: 1.15em;
   height: 1.15em;
-  border: 0.15em solid black;
+  border: 0.15em solid var(--dark-primary);
   border-radius: 50%;
   transform: translateY(-0.075em);
   display: grid;
@@ -280,6 +287,10 @@ input[type="radio"] {
 
 .tooltip-container {
     width: 60%;
+}
+
+.tooltip-container p {
+    font-size: 16px;
 }
 
 span {
@@ -381,9 +392,9 @@ span {
 }
 
 .btn-primary {
-    background-color: black;
+    background-color: var(--dark-primary);
     color: white;
-    border: 2px solid black;
+    border: 2px solid var(--dark-primary);
 }
 
 /* register */
@@ -444,5 +455,17 @@ span {
     .tooltip-container {
         order: 2;
         width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .generate-button-container {
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+    }
+
+    .generate-btn {
+        padding: 10px 0;
     }
 }
