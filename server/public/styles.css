@@ -641,6 +641,11 @@ span {
 
     .selector-button-container {
         height: 20px;
+        gap: 10px;
+     }
+
+     .selector-button-container button {
+        padding: 0;
      }
 
      .material-icons, .material-symbols-outlined {
@@ -648,7 +653,7 @@ span {
      }
 
      .template-container {
-        width: 250px;
+        width: 290px;
     }
     
     .template-card-container {
