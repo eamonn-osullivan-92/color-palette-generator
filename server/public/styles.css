@@ -477,7 +477,7 @@ span {
      
     .container-flex-row {
         flex-direction: column;
-        padding-top: 2em;
+        padding-top: 1em;
     }
 
     .template-container {
@@ -558,7 +558,6 @@ span {
 @media  (max-width: 600px) {
 
     .generate-container {
-        min-height: 250px;
         height: auto;
          width: 100%;
      }
@@ -570,7 +569,7 @@ span {
     .generate-button-container {
         flex-direction: column;
         width: 100%;
-        padding-bottom: 2em;
+        padding-bottom: 1em;
     }
 
     .save-modal {
@@ -621,8 +620,6 @@ span {
 
 @media (max-width: 470px) {
 
-   
-
     .main-title {
         font-size: 1rem;
         padding-left: 0;
@@ -631,12 +628,8 @@ span {
     
     .list-item {
         font-size: 1rem;
-        padding-left: 5px;
+        padding-left: 10px;
         letter-spacing: 0px;
-    }
-
-    .generate-background {
-        height: 80px;
     }
 
     .selector-button-container {
