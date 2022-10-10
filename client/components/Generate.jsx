@@ -112,7 +112,7 @@ export default function Generate() {
               Generate
             </button>
             {userId && (
-              <button className=" btn" onClick={handleIsSave}>
+              <button className="save-btn btn" onClick={handleIsSave}>
                 Save
               </button>
             )}
