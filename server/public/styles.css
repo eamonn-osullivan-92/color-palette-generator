@@ -7,7 +7,7 @@
   }
 
 :root {
-    --dark-primary: #222222;
+    --dark-primary: #3B3B3B;
     --dark-secondary: #3B3B3B;
 }
 
@@ -427,7 +427,7 @@ span {
     font-weight: bold;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1250px) {
     .current-color{
         display: none;
     }
@@ -471,7 +471,7 @@ span {
         width: 150px;
      }
      
-     .color-picker-selector:last-child {
+     .generated-color-container:last-child .color-picker-selector {
         left: -20%;
      }
      
@@ -487,6 +487,17 @@ span {
     .tooltip-container {
         order: 2;
         width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .main-title {
+        font-size: 2rem;
+        color: red;
+    }
+    
+    .list-item {
+        font-size: 1.5rem;
     }
 }
 
@@ -508,6 +519,40 @@ span {
      .material-icons, .material-symbols-outlined {
         font-size: 16px;
      }
+}
+
+@media  (max-width: 700px ){
+    body {
+        margin: 0px 20px;
+    }
+
+    .main-title {
+        font-size: 1.5rem;
+    }
+    
+    .list-item {
+        font-size: 1rem;
+    }
+
+    .color-picker-selector {
+        bottom: -165px;
+        width: 140px;
+    }
+
+    .color-picker-selector .react-colorful {
+        height: 140px;
+        width: 140px;
+     }
+
+     .hex-input {
+        width: 130px;
+     }
+
+     
+     .generated-color-container:last-child .color-picker-selector {
+        left: -20%;
+     }
+    
 }
 
 @media  (max-width: 600px) {
@@ -538,3 +583,92 @@ span {
     }
 
 }
+
+@media (max-width: 550px ) {
+    .header {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .main-title {
+        font-size: 1.2rem;
+        padding-left: 0;
+    }
+
+    .nav-list {
+        padding-right: 0;
+    
+    }
+    
+    .list-item {
+        font-size: 1rem;
+    }
+
+    .generate-background {
+        height: 90px;
+    }
+
+    .selector-button-container {
+        height: 20px;
+        gap: 0px;
+     }
+
+     .material-icons, .material-symbols-outlined {
+        font-size: 14px;
+     }
+}
+
+
+@media (max-width: 470px) {
+
+   
+
+    .main-title {
+        font-size: 1rem;
+        padding-left: 0;
+        letter-spacing: 0px;
+    }
+    
+    .list-item {
+        font-size: 1rem;
+        padding-left: 5px;
+        letter-spacing: 0px;
+    }
+
+    .generate-background {
+        height: 80px;
+    }
+
+    .selector-button-container {
+        height: 20px;
+     }
+
+     .material-icons, .material-symbols-outlined {
+        font-size: 10px;
+     }
+
+     .template-container {
+        width: 250px;
+    }
+    
+    .template-card-container {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        border-radius: 7px;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .template-disclaimer {
+        font-size: 12px;
+        font-style: italic;
+    }
+
+    .generated-color-container:last-child .color-picker-selector {
+        left: -100%;
+     }
+}
+
+

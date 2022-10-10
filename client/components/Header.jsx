@@ -18,7 +18,7 @@ export default function Header() {
   return (
     <>
       <header className="header">
-        <h1 className="main-title">Colour Palettes</h1>
+        <h1 className="main-title">Colorful Life</h1>
         <nav className="nav">
           <ul className="nav-list">
             <IfAuthenticated>

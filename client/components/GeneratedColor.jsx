@@ -78,7 +78,11 @@ export default function GeneratedColor({
           <HexColorPicker color={color.toUpperCase()} onChange={setColor} />
         )}
         {isSelector && (
-          <HexColorInput color={color.toUpperCase()} onChange={setColor} />
+          <HexColorInput
+            color={color.toUpperCase()}
+            onChange={setColor}
+            className="hex-input"
+          />
         )}
       </div>
     </div>
