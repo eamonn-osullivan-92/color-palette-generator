@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 
-import { updateLoggedInUser } from '../actions/loggedInUser'
-
 import {
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
   setPersistence,
   browserSessionPersistence,
@@ -18,10 +15,6 @@ export default function SignIn() {
   const [registerPassword, setRegisterPassword] = useState('')
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
-
-  onAuthStateChanged(auth, (currentUser) => {
-    updateLoggedInUser(currentUser)
-  })
 
   const register = async () => {
     setPersistence(auth, browserSessionPersistence)

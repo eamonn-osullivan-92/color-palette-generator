@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 // import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../../server/firebase.config'
+import { onAuthStateChanged } from 'firebase/auth'
 //
 import Header from './Header'
 import Palettes from './Palettes'
@@ -12,8 +13,12 @@ import Register from './Register'
 import { getPalettes } from '../apiClient'
 
 function App() {
-  const user = auth.currentUser
   const [userPalettes, setUserPalettes] = useState(null)
+  const [user, setUser] = useState(null)
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser)
+  })
 
   useEffect(() => {
     user &&

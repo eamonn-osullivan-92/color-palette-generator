@@ -1,5 +1,5 @@
 import React from 'react'
-import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+// import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
 import { signOut } from 'firebase/auth'
 import { auth } from '../../server/firebase.config'
