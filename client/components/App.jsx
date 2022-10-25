@@ -1,48 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import { Routes, Route, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { useAuth0 } from '@auth0/auth0-react'
-
+import { Routes, Route } from 'react-router-dom'
+// import { useDispatch, useSelector } from 'react-redux'
+import { auth } from '../../server/firebase.config'
 //
 import Header from './Header'
 import Palettes from './Palettes'
 import Generate from './Generate'
+import SignIn from './SignIn'
 import Register from './Register'
 //
-import { useCacheUser } from '../auth0-utils'
-import { getUser, getPalettes } from '../apiClient'
-import { clearLoggedInUser, updateLoggedInUser } from '../actions/loggedInUser'
+import { getPalettes } from '../apiClient'
 
 function App() {
-  useCacheUser()
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { getAccessTokenSilently, isAuthenticated } = useAuth0()
-  const user = useSelector((state) => state.loggedInUser)
+  const user = auth.currentUser
   const [userPalettes, setUserPalettes] = useState(null)
 
   useEffect(() => {
-    user.token &&
-      getPalettes(user.token).then((palettes) => {
-        setUserPalettes(palettes)
-      })
-  }, [user.token, userPalettes])
-
-  useEffect(async () => {
-    try {
-      if (!isAuthenticated) {
-        dispatch(clearLoggedInUser())
-      } else {
-        let token = await getAccessTokenSilently()
-        let userInDb = await getUser(token)
-        userInDb
-          ? dispatch(updateLoggedInUser(userInDb))
-          : navigate('/register')
-      }
-    } catch (err) {
-      console.error(err)
-    }
-  }, [isAuthenticated])
+    user &&
+      auth.currentUser
+        .getIdToken()
+        .then((idToken) => getPalettes(idToken))
+        .then((palettes) => setUserPalettes(palettes))
+        .catch((err) => {
+          console.log(err.message)
+        })
+  }, [user])
 
   return (
     <div className="main-container">
@@ -55,11 +37,11 @@ function App() {
             <Palettes
               palettes={userPalettes}
               setUserPalettes={setUserPalettes}
-              token={user.token}
             />
           }
         />
         <Route path="/register" element={<Register />} />
+        <Route path="/signin" element={<SignIn />} />
       </Routes>
     </div>
   )

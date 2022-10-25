@@ -1,9 +1,17 @@
 import React from 'react'
-import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
+import { signOut } from 'firebase/auth'
+import { auth } from '../../server/firebase.config'
+import { useNavigate } from 'react-router'
+
 export default function Header() {
-  const { logout, loginWithRedirect } = useAuth0()
+  const user = auth.currentUser
+  const navigate = useNavigate()
+
+  const logout = async () => {
+    await signOut(auth)
+  }
 
   const handleLogOff = (e) => {
     e.preventDefault()
@@ -12,7 +20,7 @@ export default function Header() {
 
   const handleSignIn = (e) => {
     e.preventDefault()
-    loginWithRedirect()
+    navigate('/signin')
   }
 
   return (
@@ -21,7 +29,7 @@ export default function Header() {
         <h1 className="main-title">Colorful Life</h1>
         <nav className="nav">
           <ul className="nav-list">
-            <IfAuthenticated>
+            {/* <IfAuthenticated>
               <li className="list-item">
                 <a href="/">Home</a>
               </li>
@@ -43,7 +51,33 @@ export default function Header() {
                   Sign In
                 </a>
               </li>
-            </IfNotAuthenticated>
+            </IfNotAuthenticated> */}
+            {user ? (
+              <>
+                <li className="list-item">
+                  <a href="/">Home</a>
+                </li>
+                <li className="list-item">
+                  <a href="/palettes">Palettes</a>
+                </li>
+                <li className="list-item">
+                  <a href="/" onClick={handleLogOff}>
+                    Log Out
+                  </a>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="list-item">
+                  <a href="/">Home</a>
+                </li>
+                <li className="list-item">
+                  <a href="/" onClick={handleSignIn}>
+                    Sign In
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       </header>

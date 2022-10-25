@@ -1,9 +1,11 @@
 import React from 'react'
-import { useAuth0 } from '@auth0/auth0-react'
+
+import { auth } from '../../server/firebase.config'
 
 const isAuthenticated = () => {
-  const { isAuthenticated } = useAuth0()
-  return isAuthenticated
+  const user = auth.currentUser
+  console.log(user)
+  return user ? true : false
 }
 
 export function IfAuthenticated({ children }) {

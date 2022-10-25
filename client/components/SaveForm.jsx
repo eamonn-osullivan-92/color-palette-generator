@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { savePalette } from '../apiClient'
 
+import { auth } from '../../server/firebase.config'
+
 export default function SaveForm({ userPalette, generatedPalette, setIsSave }) {
-  const token = useSelector((state) => state.loggedInUser.token)
   const [name, setName] = useState('')
 
   const handleSave = () => {
@@ -11,8 +11,16 @@ export default function SaveForm({ userPalette, generatedPalette, setIsSave }) {
     let palette = generatedPalette.map((color, index) =>
       userPalette[index] !== null ? (color = userPalette[index]) : color
     )
-    savePalette(name, palette, token)
-    setIsSave((prevState) => !prevState)
+    auth.currentUser
+      .getIdToken()
+      .then((idToken) => {
+        console.log(idToken)
+        savePalette(name, palette, idToken)
+        setIsSave((prevState) => !prevState)
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
   }
 
   return (

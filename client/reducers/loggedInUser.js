@@ -4,8 +4,8 @@ import {
 } from '../actions/loggedInUser'
 
 const emptyUser = {
-  auth0Id: '',
-  username: '',
+  email: '',
+  uid: '',
 }
 
 export default function user(state = emptyUser, action) {

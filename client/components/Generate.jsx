@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+
+import { auth } from '../../server/firebase.config'
 
 import { generateTargetedPalette } from '../apiClient'
 import { rgbArraytoHexArray } from '../../server/utils'
@@ -9,7 +10,8 @@ import SaveForm from './SaveForm'
 import Template from './Template'
 
 export default function Generate() {
-  const userId = useSelector((redux) => redux.loggedInUser.auth0Id)
+  const user = auth.currentUser
+
   const [generatedPalette, setGeneratedPalette] = useState([
     '#f5f5f5',
     '#dbdbdb',
@@ -111,7 +113,7 @@ export default function Generate() {
             >
               Generate
             </button>
-            {userId && (
+            {user && (
               <button className="save-btn btn" onClick={handleIsSave}>
                 Save
               </button>

@@ -16,10 +16,10 @@
         "test": "jest --watchAll",
         "lint": "eslint --ext .js,.jsx .",
         "build": "run-p build:client build:server",
-"build:client": "npm run webpack -- --mode production",
-"build:server": "npm run knex -- migrate:latest",
-"webpack": "webpack --config ./client/webpack.config.js",
-"knex": "knex --knexfile ./server/db/knexfile.js"
+        "build:client": "npm run webpack -- --mode production",
+        "build:server": "npm run knex -- migrate:latest",
+        "webpack": "webpack --config ./client/webpack.config.js",
+        "knex": "knex --knexfile ./server/db/knexfile.js"
     },
     "babel": {
         "presets": [
@@ -42,6 +42,7 @@
         "express": "^4.17.2",
         "express-jwt": "^6.1.0",
         "express-jwt-authz": "^2.4.1",
+        "firebase": "^9.12.1",
         "framer-motion": "^6.5.1",
         "jwks-rsa": "^2.0.4",
         "knex": "^2.3.0",
